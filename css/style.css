@@ -1,4 +1,33 @@
-/* css/style.css */
+/* css/style.css - Ant Design 5 Style */
+
+/* ===== Design Tokens ===== */
+:root {
+  --color-primary: #1677ff;
+  --color-primary-hover: #4096ff;
+  --color-primary-active: #0958d9;
+  --color-success: #52c41a;
+  --color-warning: #faad14;
+  --color-error: #ff4d4f;
+  --color-text: rgba(0, 0, 0, 0.88);
+  --color-text-secondary: rgba(0, 0, 0, 0.65);
+  --color-text-tertiary: rgba(0, 0, 0, 0.45);
+  --color-border: #d9d9d9;
+  --color-border-hover: #4096ff;
+  --color-bg-container: #ffffff;
+  --color-bg-layout: #f5f5f5;
+  --color-bg-elevated: #ffffff;
+  --color-fill-secondary: rgba(0, 0, 0, 0.06);
+  --color-fill-tertiary: rgba(0, 0, 0, 0.04);
+  --border-radius: 6px;
+  --border-radius-lg: 8px;
+  --border-radius-sm: 4px;
+  --box-shadow: 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
+  --box-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.03), 0 1px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px 0 rgba(0, 0, 0, 0.02);
+  --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'SF Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+}
+
+/* ===== Reset ===== */
 * {
   margin: 0;
   padding: 0;
@@ -6,62 +35,83 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background: #f5f5f5;
-  color: #333;
+  font-family: var(--font-family);
+  font-size: 14px;
+  line-height: 1.5714;
+  color: var(--color-text);
+  background: var(--color-bg-layout);
   min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
+/* ===== Header ===== */
 header {
-  background: #fff;
-  padding: 20px 24px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  background: var(--color-bg-container);
+  padding: 16px 24px;
+  box-shadow: var(--box-shadow-sm);
+  border-bottom: 1px solid var(--color-border);
 }
 
 header h1 {
-  font-size: 1.5rem;
+  font-size: 20px;
   font-weight: 600;
-  color: #1a1a2e;
+  color: var(--color-text);
+  letter-spacing: -0.01em;
 }
 
-/* Tabs */
+/* ===== Tabs ===== */
 .tabs {
   display: flex;
-  gap: 4px;
-  background: #fff;
-  padding: 12px 24px 0;
-  border-bottom: 1px solid #e0e0e0;
+  gap: 0;
+  background: var(--color-bg-container);
+  padding: 0 24px;
+  border-bottom: 1px solid var(--color-border);
   overflow-x: auto;
 }
 
 .tab {
-  padding: 10px 20px;
+  padding: 12px 20px;
   border: none;
   background: transparent;
-  color: #666;
-  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  font-size: 14px;
   cursor: pointer;
-  border-radius: 8px 8px 0 0;
-  transition: all 0.2s;
+  position: relative;
+  transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
   white-space: nowrap;
+  font-family: var(--font-family);
+}
+
+.tab::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: transparent;
+  transition: background 0.2s;
 }
 
 .tab:hover {
-  background: #f0f0f0;
-  color: #333;
+  color: var(--color-primary);
 }
 
 .tab.active {
-  background: #e8e8e8;
-  color: #1a1a2e;
+  color: var(--color-primary);
   font-weight: 500;
 }
 
-/* Main */
+.tab.active::after {
+  background: var(--color-primary);
+}
+
+/* ===== Main ===== */
 main {
-  max-width: 800px;
+  max-width: 880px;
   margin: 24px auto;
-  padding: 0 16px;
+  padding: 0 24px;
 }
 
 .tool-panel {
@@ -72,92 +122,142 @@ main {
   display: block;
 }
 
-/* Card */
+/* ===== Card ===== */
 .card {
-  background: #fff;
-  border-radius: 12px;
+  background: var(--color-bg-container);
+  border-radius: var(--border-radius-lg);
   padding: 24px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--box-shadow);
+  border: 1px solid var(--color-border);
 }
 
-/* Form elements */
+/* ===== Labels ===== */
 label {
   display: block;
-  font-size: 0.85rem;
-  color: #666;
-  margin-bottom: 6px;
+  font-size: 14px;
+  color: var(--color-text);
+  margin-bottom: 8px;
 }
 
+/* ===== Textarea ===== */
 textarea {
   width: 100%;
   min-height: 150px;
-  padding: 12px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
-  font-size: 0.85rem;
+  padding: 8px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1.5714;
+  color: var(--color-text);
+  background: var(--color-bg-container);
   resize: vertical;
-  transition: border-color 0.2s;
+  transition: all 0.2s;
+}
+
+textarea:hover {
+  border-color: var(--color-border-hover);
 }
 
 textarea:focus {
   outline: none;
-  border-color: #4a90d9;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px rgba(22, 119, 255, 0.1);
 }
 
+textarea::placeholder {
+  color: var(--color-text-tertiary);
+}
+
+/* ===== Output Area ===== */
 .output-area {
   width: 100%;
   min-height: 150px;
   padding: 12px;
-  background: #f8f8f8;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
-  font-size: 0.85rem;
+  background: var(--color-fill-tertiary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.5714;
+  color: var(--color-text);
   white-space: pre-wrap;
   word-break: break-all;
   overflow-y: auto;
 }
 
-/* Buttons */
+/* ===== Buttons ===== */
 .btn {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 8px;
-  font-size: 0.9rem;
+  height: 32px;
+  padding: 4px 15px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  font-size: 14px;
+  line-height: 1.5714;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  font-family: var(--font-family);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.btn:active {
+  transform: scale(0.98);
 }
 
 .btn-primary {
-  background: #4a90d9;
+  background: var(--color-primary);
+  border-color: var(--color-primary);
   color: #fff;
+  box-shadow: 0 2px 0 rgba(5, 145, 255, 0.1);
 }
 
 .btn-primary:hover {
-  background: #3a7bc8;
+  background: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
+}
+
+.btn-primary:active {
+  background: var(--color-primary-active);
+  border-color: var(--color-primary-active);
+}
+
+.btn-primary:disabled {
+  background: var(--color-fill-tertiary);
+  border-color: var(--color-border);
+  color: var(--color-text-tertiary);
+  cursor: not-allowed;
+  box-shadow: none;
 }
 
 .btn-secondary {
-  background: #e8e8e8;
-  color: #333;
+  background: var(--color-bg-container);
+  border-color: var(--color-border);
+  color: var(--color-text);
 }
 
 .btn-secondary:hover {
-  background: #ddd;
+  border-color: var(--color-primary);
+  color: var(--color-primary);
 }
 
+/* ===== Button Row ===== */
 .btn-row {
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
   margin-bottom: 16px;
+  margin-top: 16px;
 }
 
-/* Options row */
+/* ===== Options Row ===== */
 .options-row {
   display: flex;
-  gap: 16px;
+  gap: 20px;
   align-items: center;
   margin-bottom: 16px;
   flex-wrap: wrap;
@@ -166,69 +266,135 @@ textarea:focus {
 .options-row label {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   margin: 0;
+  font-size: 14px;
+  color: var(--color-text);
 }
 
-/* Info text */
+/* ===== Select ===== */
+select {
+  height: 32px;
+  padding: 4px 11px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  font-size: 14px;
+  color: var(--color-text);
+  background: var(--color-bg-container);
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: var(--font-family);
+}
+
+select:hover {
+  border-color: var(--color-primary);
+}
+
+select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px rgba(22, 119, 255, 0.1);
+}
+
+/* ===== Checkbox ===== */
+input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--color-primary);
+  cursor: pointer;
+}
+
+/* ===== Range Slider ===== */
+input[type="range"] {
+  -webkit-appearance: none;
+  height: 4px;
+  background: var(--color-border);
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 0 4px rgba(22, 119, 255, 0.1);
+}
+
+/* ===== Info / Status ===== */
 .info {
-  font-size: 0.8rem;
-  color: #888;
-  margin-top: 8px;
+  font-size: 13px;
+  color: var(--color-text-tertiary);
+  margin-top: 12px;
 }
 
 .error {
-  color: #e74c3c;
-  background: #fdf0ef;
-  padding: 10px 12px;
-  border-radius: 8px;
-  font-size: 0.85rem;
+  color: var(--color-error);
+  background: rgba(255, 77, 79, 0.06);
+  border: 1px solid rgba(255, 77, 79, 0.2);
+  padding: 8px 12px;
+  border-radius: var(--border-radius);
+  font-size: 14px;
   margin-top: 12px;
 }
 
 .success {
-  color: #27ae60;
-  font-size: 0.8rem;
+  color: var(--color-success);
+  font-size: 13px;
   margin-left: 8px;
 }
 
-/* Strength indicator */
+/* ===== Strength Bar ===== */
 .strength-bar {
   height: 4px;
   border-radius: 2px;
-  background: #e0e0e0;
-  margin-top: 8px;
+  background: var(--color-border);
+  margin-top: 12px;
+  overflow: hidden;
   transition: all 0.3s;
 }
 
 .strength-bar.weak {
   width: 33%;
-  background: #e74c3c;
+  background: var(--color-error);
 }
 
 .strength-bar.medium {
   width: 66%;
-  background: #f39c12;
+  background: var(--color-warning);
 }
 
 .strength-bar.strong {
   width: 100%;
-  background: #27ae60;
+  background: var(--color-success);
 }
 
-/* Responsive */
-@media (max-width: 600px) {
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  header {
+    padding: 12px 16px;
+  }
+
   header h1 {
-    font-size: 1.25rem;
+    font-size: 18px;
   }
 
   .tabs {
-    padding: 8px 12px 0;
+    padding: 0 16px;
   }
 
   .tab {
-    padding: 8px 14px;
-    font-size: 0.8rem;
+    padding: 10px 14px;
+    font-size: 13px;
   }
 
   main {
@@ -238,5 +404,9 @@ textarea:focus {
 
   .card {
     padding: 16px;
+  }
+
+  .options-row {
+    gap: 12px;
   }
 }
