@@ -6,7 +6,7 @@
     <div class="card">
       <label for="json-input">输入 JSON:</label>
       <textarea id="json-input" placeholder='{"key": "value"}'></textarea>
-      <div class="btn-row" style="margin-top: 12px;">
+      <div class="btn-row">
         <button class="btn btn-primary" id="json-format-btn">✨ 格式化</button>
         <button class="btn btn-secondary" id="json-minify-btn">📦 压缩</button>
         <button class="btn btn-secondary" id="json-copy-btn">📋 复制</button>
@@ -27,17 +27,26 @@
 
   function countKeys(obj) {
     let count = 0;
-    function traverse(o) {
-      if (o && typeof o === 'object') {
-        const keys = Array.isArray(o) ? o : Object.keys(o);
-        for (const k of (Array.isArray(o) ? o : Object.keys(o))) {
+    function traverse(val) {
+      if (val && typeof val === 'object' && !Array.isArray(val)) {
+        for (const key of Object.keys(val)) {
           count++;
-          traverse(typeof k === 'object' && k ? k : (Array.isArray(o) ? k : o[k]));
+          traverse(val[key]);
+        }
+      } else if (Array.isArray(val)) {
+        for (const item of val) {
+          traverse(item);
         }
       }
     }
     traverse(obj);
     return count;
+  }
+
+  function getDataType(val) {
+    if (val === null) return 'null';
+    if (Array.isArray(val)) return `Array(${val.length})`;
+    return typeof val;
   }
 
   function processJSON(minify) {
@@ -53,7 +62,8 @@
       const result = minify ? JSON.stringify(parsed) : JSON.stringify(parsed, null, 2);
       output.textContent = result;
       const keys = countKeys(parsed);
-      info.textContent = `✓ 有效 JSON | ${new Blob([raw]).size} 字节 → ${new Blob([result]).size} 字节 | ${keys} 个键`;
+      const type = getDataType(parsed);
+      info.textContent = `✓ 有效 JSON | ${new Blob([raw]).size}B → ${new Blob([result]).size}B | 类型: ${type} | ${keys} 个键`;
     } catch (err) {
       output.innerHTML = `<span class="error">JSON 解析失败: ${err.message}</span>`;
       info.textContent = '';
