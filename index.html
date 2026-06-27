@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DevTools Hub</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <h1>🔧 DevTools Hub</h1>
+  </header>
+  <nav class="tabs" role="tablist">
+    <button class="tab active" data-tab="uuid" role="tab" aria-selected="true">🆔 UUID</button>
+    <button class="tab" data-tab="obfuscate" role="tab" aria-selected="false">🔀 JS 混淆</button>
+    <button class="tab" data-tab="json" role="tab" aria-selected="false">📋 JSON</button>
+    <button class="tab" data-tab="password" role="tab" aria-selected="false">🔐 密码</button>
+  </nav>
+  <main>
+    <section id="uuid-panel" class="tool-panel active" role="tabpanel"></section>
+    <section id="obfuscate-panel" class="tool-panel" role="tabpanel"></section>
+    <section id="json-panel" class="tool-panel" role="tabpanel"></section>
+    <section id="password-panel" class="tool-panel" role="tabpanel"></section>
+  </main>
+  <script>
+    // Tab switching
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(t => {
+          t.classList.remove('active');
+          t.setAttribute('aria-selected', 'false');
+        });
+        document.querySelectorAll('.tool-panel').forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
+        document.getElementById(`${tab.dataset.tab}-panel`).classList.add('active');
+      });
+    });
+  </script>
+  <script type="module" src="js/uuid-tool.js"></script>
+  <script type="module" src="js/obfuscate-tool.js"></script>
+  <script type="module" src="js/json-tool.js"></script>
+  <script type="module" src="js/password-tool.js"></script>
+</body>
+</html>
